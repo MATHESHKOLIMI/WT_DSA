@@ -1,0 +1,37 @@
+//https://leetcode.com/problems/longest-common-prefix/
+
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        if(strs.length ==1){
+            return strs[0];
+        }
+        else{
+            Map<String,String> map= new HashMap<>();
+            // for(int i=0; i< strs[0].length(); i++){
+                for(int j=0; j<=strs[0].length(); j++){
+                    map.put(strs[0].substring(0,j),strs[0].substring(0,j));
+                }
+            // }
+            System.out.println(map.size());
+    //        map.entrySet().stream().map(n-> n.getValue()).forEach(System.out::println);
+
+            Boolean subStringPresent=true;
+            String largestString="";
+            for(Map.Entry<String, String> e : map.entrySet()){
+                boolean containsInAllString= true;
+                for(String str : strs){
+                    subStringPresent= str.startsWith(e.getValue());
+                    if(!subStringPresent) {
+                        containsInAllString= false;
+                    }
+                }
+
+                if(subStringPresent && containsInAllString){
+                    if(largestString.length() < e.getValue().length())
+                        largestString=e.getValue();
+                }
+            }
+            return largestString;
+        }
+    }
+}

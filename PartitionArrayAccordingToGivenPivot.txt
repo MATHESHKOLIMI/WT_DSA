@@ -1,0 +1,29 @@
+//https://leetcode.com/problems/partition-array-according-to-given-pivot/
+
+class Solution {
+    public int[] pivotArray(int[] nums, int pivot) {
+        int[] lessNumber= {0};
+        int[] sameNumber= {0};
+        int[] largeNumber= {0};
+        List<Integer> result = new LinkedList();
+        List<Integer> less= new LinkedList<>();
+        List<Integer> same= new LinkedList<>();
+        List<Integer> large= new LinkedList<>();
+        for(int i : nums){
+            if(i< pivot){
+                less.add(i);
+            }else if(i==pivot){
+                same.add(i);
+            }else{
+                large.add(i);
+            }
+            
+        }
+        result.addAll(less);
+        result.addAll(same);
+        result.addAll(large);
+        
+        return Arrays.stream(result.stream().toArray(Integer[]::new)).mapToInt(Integer::intValue).toArray();
+        
+    }
+}

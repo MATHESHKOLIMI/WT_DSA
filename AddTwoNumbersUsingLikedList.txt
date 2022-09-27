@@ -1,0 +1,99 @@
+https://leetcode.com/problems/add-two-numbers/
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+
+import java.math.BigInteger;
+
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        
+        long i = 0;
+        StringBuilder sb1= new StringBuilder("");
+        StringBuilder sb2= new StringBuilder("");
+        long j =0;
+        
+        while(l1 != null){
+            sb1.append(""+l1.val);
+            i= (i*10) + l1.val;
+            l1= l1.next;
+        }
+        // String s1= sb1.toString();
+        
+         while(l2 != null){
+            sb2.append(""+l2.val);
+            j= (j*10) + l2.val;
+            l2= l2.next;
+        }
+        
+        // String s2= sb2.toString();
+        // Long I =
+        System.out.println(i);
+        System.out.println(j);
+        
+        // long reverseOfI= 0;
+//         for(int k=0;k<s1.length();k++){
+//             char temp=s1[k];
+//             s1[k]= s1[s1.length()-1-k];
+//              s1[s1.length()-1-k]=temp;
+//         }
+        
+//         for(int k=0;k<s2.length();k++){
+//             char temp=s2[k];
+//             s2[k]= s2[s2.length()-1-k];
+//              s2[s2.length()-1-k]=temp;
+//         }
+        
+       BigInteger reverseOfI=new BigInteger(sb1.reverse().toString());
+        
+//         while(i > 0){
+//             reverseOfI = (reverseOfI*10) + i%10;
+//             i=i/10;         
+            
+//         }
+        
+//         System.out.println(reverseOfI);
+        
+        BigInteger reverseOfJ= new BigInteger(sb2.reverse().toString());
+//         while(j > 0){
+//             reverseOfJ = (reverseOfJ*10) + j%10;
+//             j=j/10;         
+            
+//         }
+        
+        System.out.println(reverseOfJ);
+        
+        BigInteger resultInt= reverseOfI.add(reverseOfJ);
+        
+        System.out.println(resultInt);
+        
+        
+        ListNode dummy= new ListNode(0, null);
+        ListNode resultNode= dummy;
+        while(resultInt.compareTo(BigInteger.ZERO) > 0){
+            // if()
+            BigInteger value= resultInt.mod(BigInteger.TEN);
+            resultInt = resultInt.divide(BigInteger.TEN);
+            resultNode.val=value.intValue();
+            if(resultInt.compareTo(BigInteger.ZERO) > 0){
+                
+                resultNode.next= new ListNode(0, null);
+                 resultNode= resultNode.next;
+            }
+            else{
+                resultNode.next=null;
+            }
+        }
+        
+        return dummy;
+        
+    }
+}
